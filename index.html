@@ -1,0 +1,34 @@
+<head>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script> 
+  <script type="text/javascript" src="js/jquery.zclip.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      $('#input').keyup(function() {
+        $('#output').val("ActiveRecord::Base.connection.execute(\"" + 
+          $(this).val().replace(/\"/g, "'").replace(/^\s*|\s*$/g,"") + 
+          "\")"); 
+      });
+      $('#output').focus(function() {
+        this.select();
+      });
+      $('#output').click(function() {
+        this.select();
+      });
+      /*$('#copy').zclip({
+        path:'js/ZeroClipboard.swf',
+        copy:function(){return $('#output').val();}
+      });*/
+      $('#clear').click(function() {
+        $('#input').val('');
+        $('#output').val('');
+      });
+    });
+  </script>
+</head>
+<body>
+  <textarea id='input' style="width:100%;" rows="15"></textarea>
+  <textarea id='output' style="width:100%;" rows="15"></textarea>
+  <!--<button type='button' id='copy'>Copy</button>-->
+  <button type='button' id='clear'>Clear</button>
+</body>
